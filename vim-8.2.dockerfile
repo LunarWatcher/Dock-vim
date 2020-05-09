@@ -1,9 +1,5 @@
 FROM dock-vim-base
 
-RUN mkdir build && cd build \
-        && git clone https://github.com/vim/vim.git
-        && git checkout tags/v8.2.0718
-        && cd vim
-        && wget <TODO>
-        && chmod +x buildvim.sh 
-        && ./buildvim.sh
+RUN cat /helpers/buildvim.sh && cd /build/vim \
+    && git checkout tags/v8.2.0718 \
+    && sh /helpers/buildvim.sh
