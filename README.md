@@ -36,6 +36,24 @@ docker build -t vim-8.1 -f vim/vim-8.1.dockerfile
 
 This will check out the relevant tag, and build Vim. Like I mentioned earlier, holding the code in a master container lets Docker cache it and save time by not needing to re-clone it. The thing that actually takes time is therefore building it.
 
+## Neovim
+
+Neovim is also included, and uses `dock-neovim-base.dockerfile`. As with Vim, this has to be built first, regardless of which Neovim version you want to install. (Note: only "latest" is currently supported).
+
+```bash
+docker build -t dock-neovim-base -f dock-neovim-base.dockerfile
+```
+
+This needs to process for a little while, to install the dependencies needed to build neovim, and to clone neovim itself.
+
+After this, neovim itself needs to be built into an image. For the latest version, use:
+
+```bash
+docker build -t neovim-latest -f neovim/neovim-latest.dockerfile
+```
+
+And it'll build a container containing the latest version of Neovim
+
 ## Using it
 
 When it's installed, pretty much all you need to do is `docker run` and `docker execute`. After that, you get access to whichever version of Vim you picked.
